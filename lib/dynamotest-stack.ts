@@ -26,14 +26,29 @@ export class DynamotestStack extends cdk.Stack {
       handler: tableLambda,
       proxy: false,
     });
+    const eventHandler: apiGateway.LambdaIntegration =
+      new apiGateway.LambdaIntegration(tableLambda);
 
     const items = itemApi.root.addResource("items");
-    items.addMethod("GET");
+    items.addMethod("GET", eventHandler, { apiKeyRequired: true });
     items.addMethod("POST");
 
     const item = items.addResource("{itemId}");
     item.addMethod("GET");
     item.addMethod("DELETE");
     item.addMethod("PATCH");
+
+    const plan = itemApi.addUsagePlan("UsagePlan", {
+      name: "ItemApiPlan",
+      throttle: {
+        rateLimit: 500,
+        burstLimit: 500,
+      },
+    });
+    const key = itemApi.addApiKey("ApiKey");
+    plan.addApiKey(key);
+    plan.addApiStage({
+      stage: itemApi.deploymentStage,
+    });
   }
 }
