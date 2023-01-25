@@ -1,3 +1,7 @@
+# Notes from Koji
+
+small project to test DynamoDB with Node.js 18 runtime, AWS SDK v3 running the queries, and trying out various queries in the DynamoDB syntax
+
 # Welcome to your CDK TypeScript project
 
 This is a blank project for CDK development with TypeScript.

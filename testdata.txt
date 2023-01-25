@@ -1,0 +1,129 @@
+{
+	"title":"falafel",
+	"tags": ["vegan","israeli","hipster"],
+	"price": 12.99
+}
+
+{
+	"title":"shawarma",
+	"tags": ["meaty","khalili","goaty"],
+	"price": 6.20
+}
+
+{
+	"title":"lettuce",
+	"tags": ["suomalainen","närpes","salaatti"],
+	"price": 2.15
+}
+
+{
+	"title":"garlic",
+	"tags": ["halal","björkby"],
+	"price": 5.70
+}
+
+{
+	"title":"olive oil",
+	"tags": ["zeit","free balestine","walla for everything"],
+	"price": 20.89
+}
+
+{
+	"title":"kassler",
+	"tags": ["suomalainen","meaty","kafir"],
+	"price": 3.99
+}
+
+{
+	"title":"cherry tomato",
+	"tags": ["närpes","salaatti","israel"],
+	"price": 2.76
+}
+
+
+{
+	"title":"kimchi",
+	"tags": ["suomalainen","mediocre","korean"],
+	"price": 50.01
+}
+
+
+{
+	"title":"ranch",
+	"tags": ["american","vegan","texas"],
+	"price": .99
+}
+
+
+
+{
+	"title":"burgers",
+	"tags": ["närpes","halal","heart burn"],
+	"price": 4.25
+}
+
+{
+	"title":"tahini",
+	"tags": ["american","free balestine","israeli"],
+	"price": 5.20
+}
+
+{
+	"title":"dag maluach",
+	"tags": ["israeli","halal","kosher"],
+	"price": 11.20
+}
+
+{
+	"title":"natto",
+	"tags": ["korean","björkby","salaatti"],
+	"price": 14.50
+}
+
+
+
+{
+	"title":"karelian pies",
+	"tags": ["looks funny","suomalainen","vegan"],
+	"price": 4.20
+}
+
+{
+	"title":"skhug",
+	"tags": ["halal","heart burn","sephardi"],
+	"price": 6.92
+}
+
+{
+	"title":"ananas",
+	"tags": ["nasty","american","korean"],
+	"price": 999.00
+}
+
+{
+	"title":"raw pork",
+	"tags": ["kafir","german","närpes"],
+	"price": 4.88
+}
+
+{
+	"title":"rockets",
+	"tags": ["vegan","hipster","suomalainen"],
+	"price": 13.13
+}
+
+{
+	"title":"birch wood",
+	"tags": ["suomalainen","texas","vegan"],
+	"price": 120.01
+}
+
+{
+	"title":"white beans",
+	"tags": ["björkby","halal","free balestine"],
+	"price": 6.92
+}
+
+
+
+
