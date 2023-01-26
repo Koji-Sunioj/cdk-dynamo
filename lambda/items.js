@@ -5,17 +5,19 @@ const {
   DeleteCommand,
   UpdateCommand,
   DynamoDBDocumentClient,
+  QueryCommand,
 } = require("@aws-sdk/lib-dynamodb");
 const { statusHandler } = require("./utils/statusHandler");
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 
 exports.handler = async function (event, context) {
-  const { httpMethod, resource, pathParameters, body } = event;
+  const { httpMethod, resource, pathParameters, body, queryStringParameters } =
+    event;
   const routeKey = `${httpMethod} ${resource}`;
   let statusCode = 200;
   let returnObject = {};
   let dbParams = { TableName: process.env.DB_NAME };
-  let itemId, httpStatusCode, price, title, tags, Item;
+  let itemId, httpStatusCode, price, title, tags, Item, Items;
   const needsId = [
     "GET /items/{itemId}",
     "DELETE /items/{itemId}",
@@ -31,7 +33,40 @@ exports.handler = async function (event, context) {
   try {
     switch (routeKey) {
       case "GET /items":
-        const { Items } = await docClient.send(new ScanCommand(dbParams));
+        const hasQuery = queryStringParameters !== null;
+        const hasFilter = hasQuery && "filter" in queryStringParameters;
+        if (hasFilter) {
+          const { filter } = queryStringParameters;
+          dbParams = {
+            ...dbParams,
+            FilterExpression:
+              "contains(tags, :title) OR contains(title, :title)",
+            ExpressionAttributeValues: { ":title": filter },
+          };
+        }
+        ({ Items } = await docClient.send(new ScanCommand(dbParams)));
+        const hasSort =
+          hasQuery &&
+          "sort" in queryStringParameters &&
+          "direction" in queryStringParameters;
+
+        if (hasSort) {
+          const { sort, direction } = queryStringParameters;
+          const next = direction === "ascending" ? 1 : -1;
+          const prev = direction === "ascending" ? -1 : 1;
+
+          Items.sort((a, b) =>
+            a[sort] > b[sort] ? next : b[sort] > a[sort] ? prev : 0
+          );
+        }
+
+        const hasPage = hasQuery && "page" in queryStringParameters;
+        if (hasPage) {
+          const { page } = queryStringParameters;
+          const truPage = 5 * Number(page);
+          Items = Items.slice(truPage - 5, truPage);
+        }
+
         returnObject = { items: Items };
         break;
       case "POST /items":
